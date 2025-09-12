@@ -1,12 +1,26 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './context/AuthContext';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
-
-export const App = () => {
+const App = () => {
   return (
-    <>
-      <div>
-        <h1 className="text-4xl font-bold text-center">Hello World!</h1>
-        <p className="text-center mt-4">Welcome to my React App with Tailwind CSS</p>
-        </div>
-    </>
-  )
-}
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<h1>Home Page</h1>} />
+          <Route path='/about' element={<h1>About Page</h1>} />
+          <Route path='/contact' element={<h1>Contact Page</h1>} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/tasks' element={<h1>Tasks Page</h1>} />
+          <Route path='/add-task' element={<h1>Add Task Page</h1>} />
+          <Route path='/tasks/:id' element={<h1>Task Details Page</h1>} />
+          <Route path='/profile' element={<h1>Profile Page</h1>} />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
+  );
+};
+
+export default App;
