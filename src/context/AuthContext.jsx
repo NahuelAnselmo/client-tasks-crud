@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { registerRequest } from '../api/auth';
 
 export const AuthContext = createContext();
@@ -13,17 +13,36 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [isauthenticated, setIsAuthenticated] = useState(false);
+  const [errors, setErrors] = useState([]);
 
   const signup = async user => {
-    const res = await registerRequest(user);
-    console.log(res);
+    try {
+      const res = await registerRequest(user);
+      setUser(res.data);
+      setIsAuthenticated(true);
+      setErrors([]);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        const msg = error.response.data.message;
+        setErrors(Array.isArray(msg) ? msg : [msg]);
+      } else {
+        setErrors(['An unexpected error occurred. Please try again later.']);
+      }
+    }
   };
 
   return (
     <AuthContext.Provider
       value={{
-        user,
         signup,
+        user,
+        isauthenticated,
+        errors,
       }}
     >
       {children}
