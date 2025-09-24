@@ -55,11 +55,12 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const cookies = Cookies.get('session_id');
-    if (cookies.token) {
+    const token = Cookies.get('session_id');
+    if (token) {
       setIsAuthenticated(true);
-      // Aquí podríamos hacer una petición para obtener los datos del usuario
-      // y setear el estado de user
+    } else {
+      setIsAuthenticated(false);
+      setUser(null);
     }
   }, [user]);
 
