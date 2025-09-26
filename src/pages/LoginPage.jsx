@@ -43,6 +43,7 @@ export function LoginPage() {
             {...register('email', { required: true })}
           />
           <p>{errors.email?.message}</p>
+      
 
           <Label htmlFor='password'>Password:</Label>
           <Input

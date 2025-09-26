@@ -36,7 +36,7 @@ export const AuthProvider = ({ children }) => {
       if (Array.isArray(error.response.data)) {
         setErrors(error.response.data);
       } else {
-        setErrors([error.response.data.message]); // 👈 siempre guardamos un array
+        setErrors([error.response.data.message]);
       }
     }
   };
@@ -55,8 +55,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const token = Cookies.get('session_id');
+    const token = Cookies.get('token');
     if (token) {
+      console.log('Token actual:', token); 
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
