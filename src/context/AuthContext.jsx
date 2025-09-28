@@ -1,8 +1,5 @@
-import Cookies from "js-cookie";
 import { createContext, useContext, useEffect, useState } from "react";
 import { loginRequest, registerRequest, verityTokenRequet } from "../api/auth";
-import { set } from "zod";
-import { is } from "zod/v4/locales";
 
 export const AuthContext = createContext();
 
@@ -16,7 +13,7 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isauthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -65,28 +62,27 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    async function checkLogin() {
-      setLoading(true);
-      const token = Cookies.get("token");
-      if (token) {
-        try {
-          const res = await verityTokenRequet(token);
-          if (!res.data) {
-            setIsAuthenticated(false);
-            setUser(null);
-          } else {
-            setIsAuthenticated(true);
-            setUser(res.data);
-          }
-        } catch (error) {
-          setIsAuthenticated(false);
-          setUser(null);
-        }
+  async function checkLogin() {
+    setLoading(true);
+    try {
+      const res = await verityTokenRequet(); // no le paso token
+      if (!res.data) {
+        setIsAuthenticated(false);
+        setUser(null);
+      } else {
+        setIsAuthenticated(true);
+        setUser(res.data);
       }
+    } catch (error) {
+      setIsAuthenticated(false);
+      setUser(null);
+    } finally {
       setLoading(false);
     }
-    checkLogin();
-  }, []);
+  }
+  checkLogin();
+}, []);
+
 
   return (
     <AuthContext.Provider
@@ -95,7 +91,7 @@ export const AuthProvider = ({ children }) => {
         signin,
         loading,
         user,
-        isauthenticated,
+        isAuthenticated,
         errors,
       }}
     >
