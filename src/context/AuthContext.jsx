@@ -1,5 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import { loginRequest, registerRequest, verityTokenRequet } from "../api/auth";
+import { useNotification } from "./NotificationContext";
 
 export const AuthContext = createContext();
 
@@ -16,6 +18,7 @@ export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { notify } = useNotification();
 
   useEffect(() => {
     if (errors.length > 0) {
@@ -31,6 +34,7 @@ export const AuthProvider = ({ children }) => {
       if (res.status === 200) {
         setUser(res.data);
         setIsAuthenticated(true);
+        notify("¡Registro exitoso!", "success");
       }
     } catch (error) {
       console.log(error.response.data);
@@ -51,6 +55,7 @@ export const AuthProvider = ({ children }) => {
       console.log(res);
       setUser(res.data);
       setIsAuthenticated(true);
+      notify("¡Inicio de sesión exitoso!", "success");
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data);
@@ -61,28 +66,34 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const logout = () => {
+    Cookies.remove("token");
+    setUser(null);
+    setIsAuthenticated(false);
+    notify("Sesión cerrada", "info");
+  };
+
   useEffect(() => {
-  async function checkLogin() {
-    setLoading(true);
-    try {
-      const res = await verityTokenRequet(); // no le paso token
-      if (!res.data) {
+    async function checkLogin() {
+      setLoading(true);
+      try {
+        const res = await verityTokenRequet(); // no le paso token
+        if (!res.data) {
+          setIsAuthenticated(false);
+          setUser(null);
+        } else {
+          setIsAuthenticated(true);
+          setUser(res.data);
+        }
+      } catch (error) {
         setIsAuthenticated(false);
         setUser(null);
-      } else {
-        setIsAuthenticated(true);
-        setUser(res.data);
+      } finally {
+        setLoading(false);
       }
-    } catch (error) {
-      setIsAuthenticated(false);
-      setUser(null);
-    } finally {
-      setLoading(false);
     }
-  }
-  checkLogin();
-}, []);
-
+    checkLogin();
+  }, []);
 
   return (
     <AuthContext.Provider
@@ -90,6 +101,7 @@ export const AuthProvider = ({ children }) => {
         signup,
         signin,
         loading,
+        logout,
         user,
         isAuthenticated,
         errors,
