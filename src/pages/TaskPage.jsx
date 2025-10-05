@@ -13,7 +13,7 @@ export function TasksPage() {
   return (
     <>
       {tasks.length === 0 && (
-        <div className="flex justify-center items-center p-10">
+        <div className="flex justify-center items-center p-10 mt-20">
           <div>
             <ImFileEmpty className="text-6xl text-gray-400 m-auto my-2" />
             <h1 className="font-bold text-xl">
@@ -23,7 +23,7 @@ export function TasksPage() {
         </div>
       )}
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2">
+      <div className="grid gap-6 px-4 pt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20">
         {tasks.map((task) => (
           <TaskCard task={task} key={task._id} />
         ))}

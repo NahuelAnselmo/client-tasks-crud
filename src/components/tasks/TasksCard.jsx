@@ -13,13 +13,20 @@ export function TaskCard({ task }) {
 
   return (
     <Card>
-      <header className="flex justify-between">
-        <h1 className="text-2xl font-bold">{task.title}</h1>
-        <div className="flex gap-x-2 items-center">
-          <Button onClick={handleDelete}>Delete</Button>
-          <ButtonLink to={`/tasks/${task._id}`}>Edit</ButtonLink>
+      <header className="flex justify-between items-start gap-2 flex-wrap">
+        <h1 className="text-xl font-bold break-words max-w-[60%]">
+          {task.title}
+        </h1>
+        <div className="flex gap-2 items-center flex-shrink-0">
+          <Button onClick={handleDelete} size="sm">
+            Delete
+          </Button>
+          <ButtonLink to={`/tasks/${task._id}`} size="sm">
+            Edit
+          </ButtonLink>
         </div>
       </header>
+
       <p className="text-slate-300">{task.description}</p>
       {/* format date */}
       <p>

@@ -1,14 +1,19 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import Cookies from "js-cookie";
-import { loginRequest, registerRequest, verityTokenRequet } from "../api/auth";
-import { useNotification } from "./NotificationContext";
+import { createContext, useContext, useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
+import {
+  loginRequest,
+  registerRequest,
+  logoutRequest,
+  verityTokenRequet,
+} from '../api/auth';
+import { useNotification } from './NotificationContext';
 
 export const AuthContext = createContext();
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 };
@@ -34,7 +39,7 @@ export const AuthProvider = ({ children }) => {
       if (res.status === 200) {
         setUser(res.data);
         setIsAuthenticated(true);
-        notify("¡Registro exitoso!", "success");
+        notify('¡Registro exitoso!', 'success');
       }
     } catch (error) {
       console.log(error.response.data);
@@ -55,7 +60,7 @@ export const AuthProvider = ({ children }) => {
       console.log(res);
       setUser(res.data);
       setIsAuthenticated(true);
-      notify("¡Inicio de sesión exitoso!", "success");
+      notify('¡Inicio de sesión exitoso!', 'success');
     } catch (error) {
       if (Array.isArray(error.response.data)) {
         return setErrors(error.response.data);
@@ -66,11 +71,16 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const logout = () => {
-    Cookies.remove("token");
-    setUser(null);
-    setIsAuthenticated(false);
-    notify("Sesión cerrada", "info");
+  const logout = async () => {
+    try {
+      await logoutRequest();
+      setUser(null);
+      setIsAuthenticated(false);
+      notify('¡Cierre de sesión exitoso!', 'success');
+    } catch (error) {
+      notify('Ocurrió un error al cerrar sesión', 'error');
+      console.log(error);
+    }
   };
 
   useEffect(() => {
