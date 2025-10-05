@@ -21,7 +21,8 @@ export function NotificationProvider({ children }) {
       {children}
       {message && (
         <div
-          className={`fixed top-5 right-5 z-50 px-4 py-2 rounded shadow-lg text-white transition-all
+          className={`fixed left-1/2 top-16 z-50 px-4 py-2 rounded shadow-lg text-white transition-all
+            transform -translate-x-1/2
             ${type === "success" ? "bg-green-600" : ""}
             ${type === "error" ? "bg-red-600" : ""}
             ${type === "info" ? "bg-blue-600" : ""}

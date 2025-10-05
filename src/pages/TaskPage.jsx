@@ -13,7 +13,7 @@ export function TasksPage() {
   return (
     <>
       {tasks.length === 0 && (
-        <div className="flex justify-center items-center p-10 mt-20">
+        <div className="flex justify-center items-center p-10 mt-20 min-h-[100vh]">
           <div>
             <ImFileEmpty className="text-6xl text-gray-400 m-auto my-2" />
             <h1 className="font-bold text-xl">

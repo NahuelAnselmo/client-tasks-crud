@@ -8,7 +8,7 @@ export function HomePage() {
   const { isAuthenticated } = useAuth();
 
   return (
-    <div className="bg-gradient-to-b from-zinc-900 via-zinc-800 to-zinc-900 min-h-screen text-white">
+    <div className="text-white">
       {/* HERO */}
       <section className="text-center py-20 px-6">
         <h1 className="text-5xl font-extrabold mb-4">
@@ -34,7 +34,7 @@ export function HomePage() {
           Características
         </h2>
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-zinc-800 p-6 rounded-lg shadow-md text-center hover:scale-105 transition-transform">
+          <div className="p-6 rounded-lg shadow-md text-center hover:scale-105 transition-transform bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-700">
             <FaTasks className="text-4xl mx-auto text-blue-400 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Gestión de Tareas</h3>
             <p className="text-gray-400">
@@ -42,14 +42,14 @@ export function HomePage() {
               bajo control.
             </p>
           </div>
-          <div className="bg-zinc-800 p-6 rounded-lg shadow-md text-center hover:scale-105 transition-transform">
+          <div className="p-6 rounded-lg shadow-md text-center hover:scale-105 transition-transform bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-700">
             <FaUserShield className="text-4xl mx-auto text-green-400 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Seguridad</h3>
             <p className="text-gray-400">
               Autenticación segura con tokens y protección de datos.
             </p>
           </div>
-          <div className="bg-zinc-800 p-6 rounded-lg shadow-md text-center hover:scale-105 transition-transform">
+          <div className="p-6 rounded-lg shadow-md text-center hover:scale-105 transition-transform bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-700">
             <FaRocket className="text-4xl mx-auto text-purple-400 mb-4" />
             <h3 className="text-xl font-semibold mb-2">Rápido y Responsivo</h3>
             <p className="text-gray-400">
@@ -60,7 +60,7 @@ export function HomePage() {
       </section>
 
       {/* DEMO */}
-      <section className="py-16 px-8 bg-zinc-800">
+      <section className="py-16 px-8">
         <h2 className="text-3xl font-bold text-center mb-8">Vista Previa</h2>
         <div className="max-w-4xl mx-auto rounded-lg shadow-lg overflow-hidden">
           <img

@@ -32,7 +32,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-zinc-800 text-white p-8 rounded-lg shadow-lg mt-25">
+    <div className="max-w-2xl mx-auto bg-zinc-800 text-white p-8 rounded-lg shadow-lg my-25">
       <h2 className="text-3xl font-bold mb-4 text-center">Contacto</h2>
       <p className="text-gray-400 text-center mb-6">
         Envíanos tus consultas o sugerencias. Te responderemos lo antes posible.
