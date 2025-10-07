@@ -119,7 +119,7 @@ export default function ContactPage() {
 
         <div className="text-center">
           <Button type="submit" className="bg-blue-600 hover:bg-blue-700">
-            Enviar
+            Envia tu consulta!!
           </Button>
         </div>
       </form>

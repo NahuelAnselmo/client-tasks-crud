@@ -64,8 +64,6 @@ export function TaskFormPage() {
     loadTask();
   }, []);
 
-  console.log('params.id:', params.id);
-
   return (
     <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-zinc-900 via-zinc-800 to-zinc-700">
       <Card>

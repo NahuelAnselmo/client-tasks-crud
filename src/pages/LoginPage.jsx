@@ -31,7 +31,7 @@ export function LoginPage() {
         {loginErrors.map((error, i) => (
           <Message message={error} key={i} />
         ))}
-        <h1 className='text-2xl font-bold'>Login</h1>
+        <h1 className='text-2xl font-bold text-center'>Login</h1>
 
         <form onSubmit={handleSubmit(onSubmit)}>
           <Label htmlFor='email'>Email:</Label>

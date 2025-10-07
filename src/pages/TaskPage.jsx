@@ -23,7 +23,7 @@ export function TasksPage() {
         </div>
       )}
 
-      <div className="grid gap-6 px-4 pt-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-20">
+      <div className="grid gap-6 px-2 pb-24 pt-6 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-22">
         {tasks.map((task) => (
           <TaskCard task={task} key={task._id} />
         ))}
